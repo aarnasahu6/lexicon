@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Lexicon",
+    "slug": "lexicon",
+    "scheme": "lexicon",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.lexicon.mobile"
+    },
+    "android": {
+      "package": "app.lexicon.mobile"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Select a business document to explain.",
+          "cameraPermission": "Photograph a business document to explain.",
+          "microphonePermission": false
+        }
+      ],
+      "expo-font"
+    ]
+  }
+}
