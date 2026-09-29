@@ -1,5 +1,9 @@
 # Lexicon — local edition
 
+[Try Lexicon in your browser](https://aarnasahu6.github.io/lexicon/) · [Source code](https://github.com/aarnasahu6/lexicon)
+
+The browser edition saves progress in each visitor’s browser; no account or API key is needed. Initial loading requires internet. The native Expo app retains its local-only architecture. Every push to `main` checks and republishes the browser edition through GitHub Pages.
+
 A local React Native / Expo app for finance and business fluency. No sign-in, API key, backend, subscription, or paid AI service. All learning content and fonts are bundled with the app. Preferences, saved vocabulary, learned status, and the latest 100 activities stay on the device.
 
 The final implementation follows the request to remove accounts and paid AI. Supabase and the server integration have been removed.
