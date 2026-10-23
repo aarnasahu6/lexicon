@@ -107,3 +107,14 @@ Reference for the Expo Router project layout: https://docs.expo.dev/router/insta
 The learning library includes earnings per share, pre-tax profit margin, share buybacks, dividends, operating leverage, economies of scale, client retention, revenue diversification, capital allocation, year-over-year growth, execution risk, and forward-looking statements. Professional scenario sentences can also be entered into Understand. Glossary results show up to eight matching terms to keep long inputs readable.
 
 Reading reference: [Charles Schwab 2025 Annual Report](https://content.schwab.com/web/retail/public/about-schwab/schwab_annual_report_2025.pdf), CEO letter, printed page 3 (PDF page 5), for EPS, pre-tax profit margin, and share buybacks in reporting context. Definitions, translations and hypothetical examples are independently written, not quotations or Schwab forecasts. No report text is ingested at runtime, no model is fine-tuned, and no API is required.
+
+
+### Automatic Scan (browser edition)
+
+Scan accepts camera captures/photos, PDFs and UTF-8 TXT files. Tesseract.js performs local OCR (English/Hinglish, Spanish, or Hindi); PDF.js reads embedded PDF text and renders image-only pages for OCR. All engine files and language data are served with the app. Documents are never uploaded. Initial engine loading requires internet; full offline engine availability is not guaranteed.
+
+Extraction automatically runs the existing curated explanation engine, showing matching glossary concepts or a supported scenario, not a generated summary of arbitrary documents. Text remains editable. Limits: 20 MB, first 10 PDF pages, 5,000 characters; truncation is announced. There is progress, cancellation, a three-minute timeout, and unreadable/encrypted document feedback. Word documents should be exported to PDF or TXT first. Native Expo preview still supports photo selection/paste; automatic extraction is implemented in the deployed browser app. Mobile camera capture depends on browser/device support.
+
+Run `pnpm prepare:scanner` before development with `pnpm start`; `pnpm web` and `pnpm export:web` prepare assets automatically. Generated `public/scanner/vendor` files are ignored by Git and built from the locked dependencies. Tesseract's optional fundraising postinstall is disabled; its prebuilt runtime is used.
+
+Validated with a printed-text PNG, a selectable-text PDF, and an image-only PDF in the browser. No physical phone-camera test was available.

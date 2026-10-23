@@ -83,8 +83,9 @@ export default function Scan() {
         Choose an image
       </Button>
       <Notice>
-        Photo selection is working. Automatic text extraction is not connected
-        yet. Paste the text below, or use the sample document.
+        Automatic photo and PDF extraction is available in the browser app at
+        aarnasahu6.github.io/lexicon. In this native preview, paste text below
+        or use the sample document.
       </Notice>
       <Button
         secondary

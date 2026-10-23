@@ -132,3 +132,17 @@ test("professional scenario wording can be unpacked in Understand", async () => 
     assert.equal(result.localizedExplanation, scenario.es);
   }
 });
+
+test("document punctuation does not hide finance terms", () => {
+  const result = offlineResponse({
+    language: "English",
+    action: "understand",
+    input: "Revenue: $100. (Operating expenses): $50; EPS: $2.",
+    stage: "Intern",
+    field: "General Business",
+  });
+  assert.deepEqual(
+    result.concepts.map((t) => t.term),
+    ["Earnings per share", "Revenue", "Operating expenses"],
+  );
+});

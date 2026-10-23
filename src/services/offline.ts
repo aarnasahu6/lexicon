@@ -199,6 +199,7 @@ const normalize = (s: string) =>
   s
     .toLowerCase()
     .replace(/[.,!?‘’'“”"—–-]/g, "")
+    .replace(/[:;()[\]{}]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 export function offlineResponse(req: ExplanationRequest) {

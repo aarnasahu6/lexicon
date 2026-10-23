@@ -5,6 +5,8 @@ const root = path.resolve(__dirname, "../dist");
 const types = {
   ".html": "text/html",
   ".js": "text/javascript",
+  ".mjs": "text/javascript",
+  ".wasm": "application/wasm",
   ".css": "text/css",
   ".ttf": "font/ttf",
   ".png": "image/png",
