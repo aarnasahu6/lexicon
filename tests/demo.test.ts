@@ -23,9 +23,9 @@ for (const language of [
         assert.match(r.simpleMeaning, /1.5 percentage points/);
     }
   });
-  test(`${language}: all 22 seed terms have localized meanings`, () => {
-    assert.equal(terms(language).length, 22);
-    assert.equal(new Set(terms(language).map((t) => t.term)).size, 22);
+  test(`${language}: all 34 learning terms have localized meanings`, () => {
+    assert.equal(terms(language).length, 34);
+    assert.equal(new Set(terms(language).map((t) => t.term)).size, 34);
     for (const t of terms(language)) {
       assert.ok(t.localizedExplanation.length > 10);
       assert.ok(t.example.length > 10);
@@ -89,4 +89,46 @@ test("Spanish terminology can find the English finance concept", () => {
     field: "Finance",
   });
   assert.equal(result.concepts[0].term, "Liquidity");
+});
+
+test("business reporting abbreviations resolve to the relevant concepts", () => {
+  const result = offlineResponse({
+    language: "English",
+    action: "understand",
+    input: "Diluted EPS and share repurchases",
+    stage: "Intern",
+    field: "General Business",
+  });
+  assert.equal(result.responseKind, "glossary");
+  assert.deepEqual(
+    result.concepts.map((t) => t.term),
+    ["Earnings per share", "Share buybacks"],
+  );
+});
+test("a long business report lookup stays within result limits", () => {
+  const result = offlineResponse({
+    language: "English",
+    action: "understand",
+    input: terms("English")
+      .map((t) => t.term)
+      .join(" "),
+    stage: "Intern",
+    field: "General Business",
+  });
+  assert.equal(result.concepts.length, 8);
+  assert.ok(ResultSchema.safeParse(result).success);
+});
+test("professional scenario wording can be unpacked in Understand", async () => {
+  const { scenarios } = await import("../src/services/offline");
+  for (const scenario of scenarios) {
+    const result = offlineResponse({
+      language: "Spanish",
+      action: "understand",
+      input: scenario.professional,
+      stage: "Intern",
+      field: "General Business",
+    });
+    assert.equal(result.simpleMeaning, scenario.simple);
+    assert.equal(result.localizedExplanation, scenario.es);
+  }
 });

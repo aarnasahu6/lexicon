@@ -90,7 +90,7 @@ export default function Workspace({
       <Copy>
         {action === "bridge"
           ? "Explore everyday situations and learn how finance professionals say it."
-          : "Look up finance terms in your text, or unpack an included scenario."}
+          : "Look up business and finance terms in your text, or unpack an included scenario."}
       </Copy>
       <Choices
         values={["Hindi / Hinglish", "Spanish", "English"] as const}
@@ -155,7 +155,7 @@ export default function Workspace({
         </Button>
       </Card>
       <Notice>
-        Works offline · Built-in scenarios and finance terminology. Your text
+        Works offline · Built-in scenarios and business terminology. Your text
         stays on this device.
       </Notice>
       {error && <Notice error>{error}</Notice>}

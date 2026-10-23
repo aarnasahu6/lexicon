@@ -12,6 +12,76 @@ type Scenario = {
 };
 export const scenarios: Scenario[] = [
   {
+    title: "Growing efficiently",
+    inputs: {
+      English: "We are selling more without increasing our fixed costs.",
+      "Hindi / Hinglish":
+        "Hamari sales badh rahi hain bina fixed costs badhaye.",
+      Spanish: "Vendemos más sin aumentar los costos fijos.",
+    },
+    simple:
+      "Sales are increasing while fixed costs stay unchanged. Profitability also depends on variable costs.",
+    professional:
+      "Revenue growth against a stable fixed-cost base may support positive operating leverage.",
+    concepts: ["Operating leverage", "Revenue", "Operating expenses"],
+    hi: "Fixed costs stable hain aur sales badh rahi hain. Profit par variable costs ka bhi asar hoga.",
+    es: "Las ventas crecen y los costos fijos se mantienen; la rentabilidad también depende de los costos variables.",
+    why: "Use this when discussing cost structure. It does not prove that profit increased.",
+  },
+  {
+    title: "Keeping clients",
+    inputs: {
+      English: "We want more of our existing customers to stay with us.",
+      "Hindi / Hinglish":
+        "Hum chahte hain ki hamare existing customers hamare saath bane rahein.",
+      Spanish: "Queremos que más clientes actuales sigan con nosotros.",
+    },
+    simple: "The team wants to keep more of the customers it already serves.",
+    professional:
+      "We aim to improve client retention through a more consistent service experience.",
+    concepts: ["Client retention", "Revenue"],
+    hi: "Existing clients ko retain karna goal hai; result measure karne ke liye time period define karein.",
+    es: "El objetivo es conservar clientes; hay que definir el período para medir el resultado.",
+    why: "This states a goal, not a completed improvement. Define a baseline before reporting success.",
+  },
+  {
+    title: "Choosing where money goes",
+    inputs: {
+      English:
+        "We need to decide how much money to reinvest and how much to return to shareholders.",
+      "Hindi / Hinglish":
+        "Humein decide karna hai kitna paisa reinvest karein aur kitna shareholders ko dein.",
+      Spanish:
+        "Debemos decidir cuánto reinvertir y cuánto devolver a los accionistas.",
+    },
+    simple:
+      "The company is deciding how to divide available resources between business investment and shareholder distributions.",
+    professional:
+      "Our capital allocation priorities balance reinvestment with shareholder distributions through dividends or share buybacks.",
+    concepts: ["Capital allocation", "Dividend", "Share buybacks"],
+    hi: "Business mein reinvestment aur shareholders ko payments ke beech resources balance karne hain.",
+    es: "Se busca equilibrar la reinversión con distribuciones a accionistas mediante dividendos o recompras.",
+    why: "Use this to explain a funding decision. Buybacks and dividends have different effects and are not guaranteed.",
+  },
+  {
+    title: "Planning a rollout",
+    inputs: {
+      English:
+        "The new service could take longer and cost more to launch than we planned.",
+      "Hindi / Hinglish":
+        "Nayi service launch karne mein planned se zyada time aur paisa lag sakta hai.",
+      Spanish:
+        "El lanzamiento del nuevo servicio podría tardar más y costar más de lo previsto.",
+    },
+    simple: "The launch may face delays or costs above the original plan.",
+    professional:
+      "The rollout carries execution risk, including potential schedule delays and cost overruns.",
+    concepts: ["Execution risk", "Operating expenses"],
+    hi: "Rollout mein delays aur extra costs ka execution risk hai; yeh possibility hai, confirmed outcome nahi.",
+    es: "El lanzamiento presenta riesgo de ejecución por posibles retrasos y sobrecostos; aún no son resultados confirmados.",
+    why: "Name the specific uncertainty so a team can plan milestones and contingencies.",
+  },
+  {
     title: "Rising costs",
     inputs: {
       "Hindi / Hinglish":
@@ -118,7 +188,7 @@ export const scenarios: Scenario[] = [
 const marginText =
   "Management expects approximately 150 basis points of gross margin compression due to unfavorable product mix.";
 export const examples = {
-  bridge: scenarios[0].inputs,
+  bridge: scenarios.find((s) => s.title === "Rising costs")!.inputs,
   understand: {
     "Hindi / Hinglish": marginText,
     Spanish: marginText,
@@ -135,7 +205,9 @@ export function offlineResponse(req: ExplanationRequest) {
   const all = terms(req.language),
     input = normalize(req.input);
   const scenario = scenarios.find((s) =>
-    Object.values(s.inputs).some((v) => normalize(v) === input),
+    [...Object.values(s.inputs), s.professional].some(
+      (v) => normalize(v) === input,
+    ),
   );
   if (scenario)
     return ResultSchema.parse({
@@ -171,6 +243,15 @@ export function offlineResponse(req: ExplanationRequest) {
         "The company may keep less gross profit from each dollar of sales. This describes an expectation, not a confirmed result.",
     });
   const aliases: Record<string, string[]> = {
+    "Earnings per share": ["eps", "diluted eps", "beneficio por acción"],
+    "Pre-tax profit margin": ["pretax profit margin", "pre tax profit margin"],
+    "Share buybacks": ["share repurchases", "buybacks", "recompras"],
+    Dividend: ["dividends", "dividendos"],
+    "Operating leverage": ["apalancamiento operativo"],
+    "Client retention": ["customer retention", "retención de clientes"],
+    "Capital allocation": ["asignación de capital"],
+    "Year-over-year growth": ["yoy", "year over year growth"],
+    "Forward-looking statements": ["forward looking statement"],
     Revenue: ["sales", "ventas", "ingresos"],
     Liquidity: ["liquidez"],
     Debt: ["loan", "préstamo", "deuda"],
@@ -189,22 +270,23 @@ export function offlineResponse(req: ExplanationRequest) {
       new RegExp("(?:^|\\s)" + normalize(n) + "(?:$|\\s)").test(input),
     ),
   );
-  if (!matches.length)
+  const selected = matches.slice(0, 8);
+  if (!selected.length)
     throw new Error(
       "No matching term yet. Choose a situation above, try the example, or look up a term such as liquidity, revenue, or EBITDA. This offline edition does not generate new rewrites.",
     );
   return ResultSchema.parse({
     responseKind: "glossary",
-    simpleMeaning: matches
+    simpleMeaning: selected
       .map((t) => `${t.term}: ${t.definition}`)
       .join("\n\n"),
-    professionalVersion: matches[0].example,
-    concepts: matches,
-    localizedExplanation: matches
+    professionalVersion: selected[0].example,
+    concepts: selected,
+    localizedExplanation: selected
       .map((t) => t.localizedExplanation)
       .join("\n\n"),
     whyItMatters:
-      "These are definitions of matching terms, with an example of professional usage. They do not interpret or rewrite your full statement.",
+      "These are definitions of up to eight matching terms, with an example of professional usage. They do not interpret or rewrite your full statement.",
   });
 }
 export async function explain(req: ExplanationRequest) {

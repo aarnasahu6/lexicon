@@ -48,7 +48,7 @@ export default function Learn() {
     >
       <Copy>
         {data.saved.filter((t) => t.learned).length} learned ·{" "}
-        {data.saved.length} saved · 22 terms to explore
+        {data.saved.length} saved · {terms("English").length} terms to explore
       </Copy>
       {deck.length > 0 && (
         <Button

@@ -40,9 +40,9 @@ Open http://localhost:8081. This is a local browser preview of the same React Na
 
 - Onboarding: language, career stage, and field, saved locally.
 - Home: Bridge, Understand, Scan, Learn, and recent activity.
-- Bridge: six curated scenarios in English, Spanish, and natural Hinglish: rising costs, paying bills, new investors, buying equipment, borrowing to grow, and cash tied up in inventory.
+- Bridge: ten curated scenarios in English, Spanish, and natural Hinglish: rising costs, paying bills, new investors, buying equipment, borrowing to grow, cash tied up in inventory, growing efficiently, keeping clients, capital allocation, and planning a rollout.
 - Understand: one financial-report scenario demonstrating 150 basis points, plus glossary lookup in pasted text, including common Spanish synonyms.
-- 22 finance terms with definitions, localized explanations, and usage examples.
+- 34 business and finance terms with definitions, localized explanations, and usage examples.
 - Saving terms, marking them learned, search, and flashcards.
 - Scan: native camera/photo selection, manual text entry, and an explicitly labeled sample document routed to Understand.
 - Settings: learning preferences and a plain explanation of local data storage.
@@ -100,3 +100,10 @@ Automated access to the local browser preview was denied, so visual and interact
 4. Create signed mobile builds when ready to distribute. Running the included content never requires an AI key.
 
 Reference for the Expo Router project layout: https://docs.expo.dev/router/installation/
+
+
+### Business language edition
+
+The learning library includes earnings per share, pre-tax profit margin, share buybacks, dividends, operating leverage, economies of scale, client retention, revenue diversification, capital allocation, year-over-year growth, execution risk, and forward-looking statements. Professional scenario sentences can also be entered into Understand. Glossary results show up to eight matching terms to keep long inputs readable.
+
+Reading reference: [Charles Schwab 2025 Annual Report](https://content.schwab.com/web/retail/public/about-schwab/schwab_annual_report_2025.pdf), CEO letter, printed page 3 (PDF page 5), for EPS, pre-tax profit margin, and share buybacks in reporting context. Definitions, translations and hypothetical examples are independently written, not quotations or Schwab forecasts. No report text is ingested at runtime, no model is fine-tuned, and no API is required.

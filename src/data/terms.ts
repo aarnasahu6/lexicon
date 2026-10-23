@@ -2,6 +2,90 @@ import { Concept, Language } from "./types";
 type Entry = [string, string, string, string, string];
 const entries: Entry[] = [
   [
+    "Earnings per share",
+    "Profit attributable to common shareholders divided by the relevant share count; diluted EPS also reflects potential dilution.",
+    "Common shareholders ka profit, relevant shares ki sankhya se divide hota hai; diluted EPS possible dilution bhi dikhata hai.",
+    "Beneficio atribuible a accionistas ordinarios dividido por las acciones correspondientes; el BPA diluido considera la posible dilución.",
+    "Compare diluted earnings per share with the same period last year.",
+  ],
+  [
+    "Pre-tax profit margin",
+    "Profit before income taxes divided by revenue, expressed as a percentage.",
+    "Income tax se pehle ka profit, revenue se divide karke percentage mein.",
+    "Beneficio antes de impuestos dividido por ingresos, expresado como porcentaje.",
+    "A higher pre-tax profit margin means more profit before tax per dollar of revenue.",
+  ],
+  [
+    "Share buybacks",
+    "A company buying back its own shares; the effect on per-share measures depends on price, funding and share count.",
+    "Company apne shares wapas kharidti hai; per-share impact price, funding aur share count par depend karta hai.",
+    "Recompra de acciones propias; el efecto por acción depende del precio, la financiación y el número de acciones.",
+    "The board authorized share buybacks alongside investment in the business.",
+  ],
+  [
+    "Dividend",
+    "A distribution to shareholders, often in cash, that is declared by a company and is not guaranteed.",
+    "Shareholders ko company ka declared payment, aksar cash mein; yeh guaranteed nahi hota.",
+    "Distribución a accionistas, normalmente en efectivo, declarada por la empresa y no garantizada.",
+    "The board declared a dividend payable next quarter.",
+  ],
+  [
+    "Operating leverage",
+    "How operating profit responds to revenue changes when some operating costs are fixed. It can amplify declines as well as growth.",
+    "Kuch costs fixed hone par revenue change ka operating profit par zyada asar pad sakta hai, dono directions mein.",
+    "Efecto de cambios en ingresos sobre el beneficio operativo cuando algunos costos son fijos; amplifica subidas y bajadas.",
+    "With fixed costs stable, higher sales created positive operating leverage.",
+  ],
+  [
+    "Economies of scale",
+    "Lower average cost per unit as output expands; savings are not automatic and depend on how the business operates.",
+    "Output badhne par average per-unit cost kam hona; savings automatic nahi hoti.",
+    "Reducción del costo medio por unidad al aumentar la producción; el ahorro depende de las operaciones.",
+    "Shared infrastructure may create economies of scale as the customer base expands.",
+  ],
+  [
+    "Client retention",
+    "The ability to keep existing clients over a period; a retention rate needs a defined starting group and time window.",
+    "Ek period mein existing clients ko banaye rakhna; rate ke liye starting group aur time period define karna zaroori hai.",
+    "Capacidad de conservar clientes durante un período; la tasa requiere un grupo inicial y un plazo definidos.",
+    "We will measure client retention over the next twelve months.",
+  ],
+  [
+    "Revenue diversification",
+    "Earning revenue from different products, customers or markets rather than relying on a single source.",
+    "Sirf ek source ki jagah alag products, customers ya markets se revenue kamaana.",
+    "Obtener ingresos de distintos productos, clientes o mercados para reducir la dependencia de una sola fuente.",
+    "The new service supports revenue diversification beyond product sales.",
+  ],
+  [
+    "Capital allocation",
+    "Deciding how to use financial resources across investment, debt repayment, cash reserves and shareholder distributions.",
+    "Financial resources ko investment, debt repayment, cash reserves aur shareholder payments mein baantne ka decision.",
+    "Decidir cómo distribuir recursos entre inversiones, pago de deuda, reservas y distribuciones a accionistas.",
+    "Our capital allocation priorities balance investment with debt reduction.",
+  ],
+  [
+    "Year-over-year growth",
+    "Change compared with the same period one year earlier; percentage growth is the change divided by the earlier value when that comparison is meaningful.",
+    "Pichhle saal ke same period se change; meaningful comparison mein percentage change ko purani value se divide karte hain.",
+    "Cambio frente al mismo período del año anterior; el crecimiento porcentual divide el cambio por el valor anterior cuando la comparación es válida.",
+    "Year-over-year growth compares this quarter with the same quarter last year.",
+  ],
+  [
+    "Execution risk",
+    "The possibility that a plan falls short because implementation takes longer, costs more or delivers less than expected.",
+    "Plan implement karte waqt delay, extra cost ya expected result na milne ka risk.",
+    "Posibilidad de que un plan no alcance sus objetivos por retrasos, sobrecostos o resultados inferiores a lo previsto.",
+    "A phased rollout can help manage execution risk.",
+  ],
+  [
+    "Forward-looking statements",
+    "Statements about expected future outcomes rather than established results; actual outcomes can differ.",
+    "Future expectations ke statements, confirmed results nahi; actual outcome alag ho sakta hai.",
+    "Afirmaciones sobre resultados futuros esperados, no resultados confirmados; la realidad puede ser distinta.",
+    "Revenue forecasts are forward-looking statements, not guaranteed results.",
+  ],
+  [
     "Revenue",
     "Money earned from selling goods or services, before expenses.",
     "Sales se aane wali total income, expenses se pehle.",
@@ -170,6 +254,6 @@ export function terms(language: Language): Concept[] {
   }));
 }
 export const packs = [
-  { id: "hi-finance", language: "Hindi / Hinglish", version: 1 },
-  { id: "es-finance", language: "Spanish", version: 1 },
+  { id: "hi-finance", language: "Hindi / Hinglish", version: 2 },
+  { id: "es-finance", language: "Spanish", version: 2 },
 ];
