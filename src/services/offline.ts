@@ -1,3 +1,4 @@
+import { macroAliases } from "../data/macroeconomics";
 import { ExplanationRequest, Language, ResultSchema } from "../data/types";
 import { terms } from "../data/terms";
 type Scenario = {
@@ -198,6 +199,8 @@ export const examples = {
 const normalize = (s: string) =>
   s
     .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .replace(/[.,!?‘’'“”"—–-]/g, "")
     .replace(/[:;()[\]{}]/g, " ")
     .replace(/\s+/g, " ")
@@ -244,6 +247,7 @@ export function offlineResponse(req: ExplanationRequest) {
         "The company may keep less gross profit from each dollar of sales. This describes an expectation, not a confirmed result.",
     });
   const aliases: Record<string, string[]> = {
+    ...macroAliases,
     "Earnings per share": ["eps", "diluted eps", "beneficio por acción"],
     "Pre-tax profit margin": ["pretax profit margin", "pre tax profit margin"],
     "Share buybacks": ["share repurchases", "buybacks", "recompras"],

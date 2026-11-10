@@ -1,4 +1,5 @@
 import { Concept, Language } from "./types";
+import { macroEntries } from "./macroeconomics";
 type Entry = [string, string, string, string, string];
 const entries: Entry[] = [
   [
@@ -241,19 +242,21 @@ const entries: Entry[] = [
   ],
 ];
 export function terms(language: Language): Concept[] {
-  return entries.map(([term, definition, hi, es, example]) => ({
-    term,
-    definition,
-    localizedExplanation:
-      language === "Hindi / Hinglish"
-        ? hi
-        : language === "Spanish"
-          ? es
-          : definition,
-    example,
-  }));
+  return [...entries, ...macroEntries].map(
+    ([term, definition, hi, es, example]) => ({
+      term,
+      definition,
+      localizedExplanation:
+        language === "Hindi / Hinglish"
+          ? hi
+          : language === "Spanish"
+            ? es
+            : definition,
+      example,
+    }),
+  );
 }
 export const packs = [
-  { id: "hi-finance", language: "Hindi / Hinglish", version: 2 },
-  { id: "es-finance", language: "Spanish", version: 2 },
+  { id: "hi-finance", language: "Hindi / Hinglish", version: 3 },
+  { id: "es-finance", language: "Spanish", version: 3 },
 ];

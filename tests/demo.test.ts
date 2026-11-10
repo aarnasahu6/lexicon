@@ -23,9 +23,9 @@ for (const language of [
         assert.match(r.simpleMeaning, /1.5 percentage points/);
     }
   });
-  test(`${language}: all 34 learning terms have localized meanings`, () => {
-    assert.equal(terms(language).length, 34);
-    assert.equal(new Set(terms(language).map((t) => t.term)).size, 34);
+  test(`${language}: all 50 learning terms have localized meanings`, () => {
+    assert.equal(terms(language).length, 50);
+    assert.equal(new Set(terms(language).map((t) => t.term)).size, 50);
     for (const t of terms(language)) {
       assert.ok(t.localizedExplanation.length > 10);
       assert.ok(t.example.length > 10);
@@ -145,4 +145,43 @@ test("document punctuation does not hide finance terms", () => {
     result.concepts.map((t) => t.term),
     ["Earnings per share", "Revenue", "Operating expenses"],
   );
+});
+
+test("Spanish macro vocabulary works with and without accents", () => {
+  for (const input of [
+    "inflación subyacente; tipo de cambio; PIB",
+    "inflacion subyacente; tipo de cambio; PIB",
+  ]) {
+    const result = offlineResponse({
+      language: "Spanish",
+      action: "understand",
+      input,
+      stage: "Intern",
+      field: "General Business",
+    });
+    for (const term of [
+      "Core inflation",
+      "Exchange rate",
+      "Gross domestic product",
+    ])
+      assert.ok(result.concepts.some((t) => t.term === term));
+  }
+});
+test("every macro term and alias resolves to its concept", async () => {
+  const { macroEntries, macroAliases } =
+    await import("../src/data/macroeconomics");
+  for (const [term] of macroEntries)
+    for (const input of [term, ...macroAliases[term]]) {
+      const result = offlineResponse({
+        language: "English",
+        action: "understand",
+        input,
+        stage: "Intern",
+        field: "General Business",
+      });
+      assert.ok(
+        result.concepts.some((t) => t.term === term),
+        input,
+      );
+    }
 });

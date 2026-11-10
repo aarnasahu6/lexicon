@@ -42,7 +42,7 @@ Open http://localhost:8081. This is a local browser preview of the same React Na
 - Home: Bridge, Understand, Scan, Learn, and recent activity.
 - Bridge: ten curated scenarios in English, Spanish, and natural Hinglish: rising costs, paying bills, new investors, buying equipment, borrowing to grow, cash tied up in inventory, growing efficiently, keeping clients, capital allocation, and planning a rollout.
 - Understand: one financial-report scenario demonstrating 150 basis points, plus glossary lookup in pasted text, including common Spanish synonyms.
-- 34 business and finance terms with definitions, localized explanations, and usage examples.
+- 50 business and finance terms with definitions, localized explanations, and usage examples.
 - Saving terms, marking them learned, search, and flashcards.
 - Scan: native camera/photo selection, manual text entry, and an explicitly labeled sample document routed to Understand.
 - Settings: learning preferences and a plain explanation of local data storage.
@@ -118,3 +118,10 @@ Extraction automatically runs the existing curated explanation engine, showing m
 Run `pnpm prepare:scanner` before development with `pnpm start`; `pnpm web` and `pnpm export:web` prepare assets automatically. Generated `public/scanner/vendor` files are ignored by Git and built from the locked dependencies. Tesseract's optional fundraising postinstall is disabled; its prebuilt runtime is used.
 
 Validated with a printed-text PNG, a selectable-text PDF, and an image-only PDF in the browser. No physical phone-camera test was available.
+
+
+### Banco de México vocabulary expansion
+
+Added 16 original macroeconomics glossary entries in English, Spanish and Hinglish. Vocabulary selection uses [Banco de México's Compilation of Quarterly Reports Released in 2017](https://www.banxico.org.mx/publications-and-press/annual-reports/%7BB8406F03-CE38-95B4-5ACC-AECFD5672F63%7D.pdf), including the opening economic overview and the sections on inflation, economic conditions and monetary policy. This is a historical English translation; the document identifies its Spanish original as authoritative. Examples are hypothetical, not current Banxico data or forecasts. No model training, endorsement, or full-report ingestion is claimed.
+
+The new entries are shared by Understand, Scan, Learn and glossary fallback in Bridge. Spanish aliases and accent-insensitive matching cover terms such as tipo de cambio, inflación subyacente and PIB. Learn also searches localized explanations and the new aliases. Existing saved vocabulary remains unchanged.

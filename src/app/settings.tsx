@@ -60,6 +60,26 @@ export default function Settings() {
           Read the source report ↗
         </Button>
       </Card>
+      <Card>
+        <Label>ECONOMICS LANGUAGE IN CONTEXT</Label>
+        <Copy>
+          Vocabulary reference: Banco de México, Compilation of Quarterly
+          Reports Released in 2017. Topics include inflation, monetary policy,
+          exchange rates and economic activity. This historical reference is not
+          current economic data. Definitions and practice examples are original;
+          Banco de México does not endorse this app.
+        </Copy>
+        <Button
+          secondary
+          onPress={() =>
+            Linking.openURL(
+              "https://www.banxico.org.mx/publications-and-press/annual-reports/%7BB8406F03-CE38-95B4-5ACC-AECFD5672F63%7D.pdf",
+            )
+          }
+        >
+          Read the Banco de México report ↗
+        </Button>
+      </Card>
       <Button secondary onPress={() => router.replace("/(tabs)/home")}>
         ← Back to Home
       </Button>

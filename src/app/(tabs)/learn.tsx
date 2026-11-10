@@ -1,3 +1,4 @@
+import { macroAliases } from "../../data/macroeconomics";
 import { useState } from "react";
 import { View, Pressable } from "react-native";
 import {
@@ -28,7 +29,16 @@ export default function Learn() {
       ? terms(language)
       : data.saved.filter((t) => filter !== "Learned" || t.learned)
   ).filter((t) =>
-    `${t.term} ${t.definition}`.toLowerCase().includes(search.toLowerCase()),
+    `${t.term} ${t.definition} ${t.localizedExplanation} ${(macroAliases[t.term] || []).join(" ")}`
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .includes(
+        search
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase(),
+      ),
   );
   const deck = data.saved;
   const active = deck[index % Math.max(deck.length, 1)];
